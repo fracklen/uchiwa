@@ -2,13 +2,12 @@ package main
 
 import (
 	"flag"
-
-	"github.com/sensu/uchiwa/uchiwa"
-	"github.com/sensu/uchiwa/uchiwa/audit"
-	"github.com/sensu/uchiwa/uchiwa/authentication"
-	"github.com/sensu/uchiwa/uchiwa/authorization"
-	"github.com/sensu/uchiwa/uchiwa/config"
-	"github.com/sensu/uchiwa/uchiwa/filters"
+	"github.com/fracklen/uchiwa/uchiwa"
+	"github.com/fracklen/uchiwa/uchiwa/audit"
+	"github.com/fracklen/uchiwa/uchiwa/authentication"
+	"github.com/fracklen/uchiwa/uchiwa/authorization"
+	"github.com/fracklen/uchiwa/uchiwa/config"
+	"github.com/fracklen/uchiwa/uchiwa/filters"
 )
 
 func main() {
@@ -22,11 +21,16 @@ func main() {
 	u := uchiwa.Init(config)
 
 	auth := authentication.New(config.Uchiwa.Auth)
-	if config.Uchiwa.Auth.Driver == "simple" {
+
+	switch config.Uchiwa.Auth.Driver {
+	case "simple":
 		auth.Simple(config.Uchiwa.Users)
-	} else {
+	case "ldap":
+		auth.Ldap(config.GetLdapClient(), config.Uchiwa.Ldap.RequireGroup)
+	default:
 		auth.None()
 	}
+
 
 	// Audit
 	audit.Log = audit.LogMock

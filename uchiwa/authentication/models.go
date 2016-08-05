@@ -1,6 +1,6 @@
 package authentication
 
-import "github.com/sensu/uchiwa/uchiwa/structs"
+import "github.com/fracklen/uchiwa/uchiwa/structs"
 
 var (
 	// Roles contains the roles for the active auth driver

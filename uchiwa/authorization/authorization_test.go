@@ -8,7 +8,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/context"
-	"github.com/sensu/uchiwa/uchiwa/authentication"
+	"github.com/fracklen/uchiwa/uchiwa/authentication"
 	"github.com/stretchr/testify/assert"
 )
 

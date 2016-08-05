@@ -10,8 +10,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/context"
 	"github.com/mitchellh/mapstructure"
-	"github.com/sensu/uchiwa/uchiwa/logger"
-	"github.com/sensu/uchiwa/uchiwa/structs"
+	"github.com/fracklen/uchiwa/uchiwa/logger"
+	"github.com/fracklen/uchiwa/uchiwa/structs"
 )
 
 // JWTToken constant

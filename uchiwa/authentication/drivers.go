@@ -1,6 +1,9 @@
 package authentication
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/fracklen/uchiwa/uchiwa/authentication/ldap"
+)
 
 // Advanced function allows a third party Identification driver
 func (a *Config) Advanced(driver loginFn, driverName string) {
@@ -22,6 +25,16 @@ func (a *Config) Simple(u []User) {
 	a.DriverName = "simple"
 
 	users = u
+
+	initToken(a.Auth)
+}
+
+func (a *Config) Ldap(c ldap.LDAPClient, requiregroup string){
+	a.DriverFn = ldap_auth
+	a.DriverName = "ldap"
+
+	ldapClient = c
+	ldapRequireGroup = requiregroup
 
 	initToken(a.Auth)
 }

@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/sensu/uchiwa/uchiwa/authentication"
-	"github.com/sensu/uchiwa/uchiwa/structs"
+	"github.com/fracklen/uchiwa/uchiwa/authentication"
+	"github.com/fracklen/uchiwa/uchiwa/structs"
 )
 
 // Config struct contains []SensuConfig and UchiwaConfig structs
@@ -92,6 +92,7 @@ type Ldap struct {
 	UserAttribute        string
 	UserBaseDN           string
 	UserObjectClass      string
+	RequireGroup         string
 }
 
 // SSL struct contains the path the SSL certificate and key

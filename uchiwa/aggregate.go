@@ -3,7 +3,7 @@ package uchiwa
 import (
 	"fmt"
 
-	"github.com/sensu/uchiwa/uchiwa/logger"
+	"github.com/fracklen/uchiwa/uchiwa/logger"
 )
 
 // GetAggregate retrieves a list of issued timestamps from a specified DC

@@ -2,7 +2,7 @@ package filters
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"github.com/sensu/uchiwa/uchiwa/structs"
+	"github.com/fracklen/uchiwa/uchiwa/structs"
 )
 
 // Filters contains the different filtering methods based on the edition

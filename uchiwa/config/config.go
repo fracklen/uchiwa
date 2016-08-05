@@ -9,8 +9,9 @@ import (
 	"strings"
 
 	"github.com/palourde/mergo"
-	"github.com/sensu/uchiwa/uchiwa/authentication"
-	"github.com/sensu/uchiwa/uchiwa/logger"
+	"github.com/fracklen/uchiwa/uchiwa/authentication"
+	"github.com/fracklen/uchiwa/uchiwa/logger"
+	"github.com/fracklen/uchiwa/uchiwa/authentication/ldap"
 )
 
 var (
@@ -47,16 +48,21 @@ var (
 // and returns the private configuration as a Config struct pointer
 func Load(file, directories string) *Config {
 	// Load the configuration file
+
 	var err error
 	Private, err = loadFile(file)
 	if err != nil {
 		logger.Fatal(err)
 	}
 
+
 	// Apply default configs to the configuration file
 	if err := mergo.Merge(Private, defaultConfig); err != nil {
 		logger.Fatal(err)
 	}
+
+
+
 	for i := range Private.Sensu {
 		if err := mergo.Merge(&Private.Sensu[i], defaultSensuConfig); err != nil {
 			logger.Fatal(err)
@@ -73,7 +79,6 @@ func Load(file, directories string) *Config {
 
 	Private.Sensu = initSensu(Private.Sensu)
 
-	// Support the dashboard attribute
 	if Private.Dashboard != nil {
 		Private.Uchiwa = *Private.Dashboard
 		// Apply the default config to the dashboard attribute
@@ -81,8 +86,13 @@ func Load(file, directories string) *Config {
 			logger.Fatal(err)
 		}
 	}
+	// Support the dashboard attribute
 
 	Private.Uchiwa = initUchiwa(Private.Uchiwa)
+
+	s, err := json.MarshalIndent(Private, "", "\t")
+	logger.Debugf("%+v\n", string(s))
+
 	return Private
 }
 
@@ -235,6 +245,22 @@ func initUchiwa(global GlobalConfig) GlobalConfig {
 	// Set the logger level
 	logger.SetLogLevel(global.LogLevel)
 	return global
+}
+
+func (c *Config) GetLdapClient() ldap.LDAPClient {
+	client := ldap.LDAPClient{
+        Base:         c.Uchiwa.Ldap.BaseDN,
+        Host:         c.Uchiwa.Ldap.Server,
+        Port:         c.Uchiwa.Ldap.Port,
+        UseSSL:       !c.Uchiwa.Ldap.Insecure,
+        BindDN:       c.Uchiwa.Ldap.BindUser,
+        BindPassword: c.Uchiwa.Ldap.BindPass,
+        UserFilter:   c.Uchiwa.Ldap.UserAttribute,
+        GroupFilter:  c.Uchiwa.Ldap.GroupMemberAttribute,
+        Attributes:   []string{"givenName", "sn", "mail", "uidNumber", "memberOf"},
+    }
+
+    return client
 }
 
 // GetPublic generates the public configuration

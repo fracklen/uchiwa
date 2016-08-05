@@ -3,8 +3,8 @@ package authorization
 import (
 	"net/http"
 
-	"github.com/sensu/uchiwa/uchiwa/authentication"
-	"github.com/sensu/uchiwa/uchiwa/logger"
+	"github.com/fracklen/uchiwa/uchiwa/authentication"
+	"github.com/fracklen/uchiwa/uchiwa/logger"
 )
 
 // Authorization contains the different methods used for authorizing

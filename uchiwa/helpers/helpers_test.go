@@ -3,7 +3,7 @@ package helpers
 import (
 	"testing"
 
-	"github.com/sensu/uchiwa/uchiwa/structs"
+	"github.com/fracklen/uchiwa/uchiwa/structs"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/sensu/uchiwa/uchiwa/authentication"
-	"github.com/sensu/uchiwa/uchiwa/authorization"
-	"github.com/sensu/uchiwa/uchiwa/filters"
-	"github.com/sensu/uchiwa/uchiwa/logger"
-	"github.com/sensu/uchiwa/uchiwa/structs"
+	"github.com/fracklen/uchiwa/uchiwa/authentication"
+	"github.com/fracklen/uchiwa/uchiwa/authorization"
+	"github.com/fracklen/uchiwa/uchiwa/filters"
+	"github.com/fracklen/uchiwa/uchiwa/logger"
+	"github.com/fracklen/uchiwa/uchiwa/structs"
 )
 
 // Authorization contains the available authorization methods

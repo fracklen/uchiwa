@@ -1,14 +1,14 @@
 FROM golang:1.6.3-alpine
 
 # golang alpine doesn't have ONBUILD, do it manually, then run npm and cleanup
-COPY . /go/src/github.com/sensu/uchiwa
-WORKDIR /go/src/github.com/sensu/uchiwa
+COPY . /go/src/github.com/fracklen/uchiwa
+WORKDIR /go/src/github.com/fracklen/uchiwa
 RUN apk add --no-cache nodejs git && \
     go install -v && \
     npm install --production --unsafe-perm && \
     npm dedupe && \
     apk del --no-cache git nodejs && \
-    rm -rf /go/src/github.com/sensu/uchiwa/node_modules
+    rm -rf /go/src/github.com/fracklen/uchiwa/node_modules
 
 VOLUME /config
 

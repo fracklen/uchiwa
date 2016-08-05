@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/sensu/uchiwa",
+	"ImportPath": "github.com/fracklen/uchiwa",
 	"GoVersion": "go1.6",
 	"GodepVersion": "v74",
 	"Packages": [
